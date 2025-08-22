@@ -1,9 +1,17 @@
+# ---- Pip-only requirements for Streamlit Cloud ----
+# Use CPU wheels for PyTorch
 --extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.2.2+cpu
-sbi==0.24.0
-numpy>=1.24
+
+# Core scientific stack (keep NumPy <2.0 to avoid ABI/version issues in cloud)
+numpy<2.0
 scipy>=1.10
 pandas>=2.0
 scikit-learn>=1.3
 joblib>=1.3
+
+# PyTorch CPU + SBI (must match your training version)
+torch==2.2.2+cpu
+sbi==0.24.0
+
+# App
 streamlit>=1.36
