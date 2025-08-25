@@ -9,21 +9,21 @@ import pickle
 # (opcional pero útil en la nube para evitar exceso de threads)
 torch.set_num_threads(1)
 
-st.set_page_config(page_title="ViVa Mi Pana", layout="wide")
+st.set_page_config(page_title="ML_MyT", layout="wide")
 
 ########################### Title
-st.title("ViVa Mi Pana :sunglasses:")
+st.title("ML-MyT")
 st.text(
-    "To use VIVA, upload a CSV/TXT file with two whitespace-separated columns:\n"
+    "To use ML-MyT, upload a CSV/TXT file with two whitespace-separated columns:\n"
     "   1) energy (keV)   2) counts\n"
 )
 
 ########################### Load models (cached)
 @st.cache_resource(show_spinner=False)
 def load_scalers_and_model():
-    scaler_prior = joblib.load("Model/scaler_prior_app6_gau.save")
-    scaler_spec  = joblib.load("Model/scaler_spec_app6_gau.save")
-    with open("Model/model_app6_gau.pkl", "rb") as f:
+    scaler_prior = joblib.load("Model/scaler_prior.save")
+    scaler_spec  = joblib.load("Model/scaler_spec.save")
+    with open("Model/model.pkl", "rb") as f:
         posterior = pickle.load(f)
     return scaler_prior, scaler_spec, posterior
 
@@ -167,7 +167,7 @@ results_df = pd.DataFrame({
     "mode_approx": modes,
     "p16": lower_68,
     "p84": upper_68,
-    "int68": int_68,
+    "p84-p16": int_68,
 })
 
 st.dataframe(results_df, use_container_width=True)
