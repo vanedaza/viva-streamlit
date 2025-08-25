@@ -53,9 +53,9 @@ except Exception as e:
 ########################### User input
 with st.sidebar:
     st.header("Input parameters")
-    nhzgal = st.number_input("N_H,Gal", min_value=0.0, step=0.1, value=0.0)
-    z = st.number_input("Redshift (z)", min_value=0.0, step=0.001, value=0.0, format="%.3f")
-    exposure_time = st.number_input("Double exposure time (s)", min_value=0.0, step=1.0, value=0.0)
+    nhzgal = st.number_input("N_H,Gal", min_value=0.0, step=1e18, value=2.57e20, format="%.2E")
+    z = st.number_input("Redshift (z)", min_value=0.0, step=0.001, value=0.0, format="%.4f")
+    exposure_time = st.number_input("Double exposure time (s)", min_value=0.0, step=1.0, value=0.0, format="%.4f")
 
 uploaded_file = st.file_uploader("Upload your spectrum (2 columns: energy, counts)", type=["txt", "dat", "csv"])
 if uploaded_file is None:
