@@ -1,0 +1,36 @@
+#!/bin/bash
+
+#Panayiotis Tzanavaris 10Oct2025
+
+#This will start write the ascii file from within xspec and select 2 columns counts and energy with awk afterwards
+
+# eg CALL: p2a this.pha
+# will create this.pha.asc
+
+#You need to have the heasoft software installed in the $HEADAS directory
+
+phafile=$1
+tempfile=/tmp/$RANDOM"_run.xcm"
+
+#start heasoft environment
+. $HEADAS/headas-init.sh
+
+#this is the command to run from xspec, telling it to run pha2asc.tcl quietly
+echo chatter 0 > $tempfile
+echo pha2asc $phafile >> $tempfile
+echo exit >> $tempfile
+
+#run xspec noninteractively with no screen output
+xspec - $tempfile > /dev/null
+
+#clean
+/bin/rm $tempfile
+
+#select rows with row numbers >3  AND columns 1 (keV) and 3 (counts)
+awk '{if(NR>3) {print $1,$3}}' w1.qdp > a.asc 
+mv a.asc $phafile.asc
+/bin/rm w1.qdp
+
+echo
+echo "$phafile --> $phafile.asc"
+echo
