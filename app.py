@@ -104,13 +104,13 @@ with center:
 
     st.markdown(
 r"""
-**Model overview (MYTORUS — decoupled)**  
-ML-MyT infers four physical parameters of AGN X-ray spectra observed with NuSTAR using a simulation-based inference approach (Neural Posterior Estimation).  
-We report posterior modes and 68% credible intervals for:  
-- $N_{\mathrm{H,Z}}$ \;[10$^{24}$ cm$^{-2}$] (line-of-sight)  
-- $N_{\mathrm{H,S}}$ \;[10$^{24}$ cm$^{-2}$] (global/scattered)  
-- $\Gamma$ \;[dimensionless] (photon index)  
-- $A_S$ \;[dimensionless] (relative normalization)
+**ML-MYT** predicts values for four physical parameters from distant reflection X-ray spectra of Active Galactic Nuclei (AGN) observed with *NuSTAR*, using a simulation-based inference approach (*Neural Posterior Estimation*).  
+The algorithm provides the **modes of the posterior distributions** and the **68% credible intervals** for the following physical parameters:
+
+- $N_{\mathrm{H,Z}}$ [10$^{24}$ cm$^{-2}$] — (line-of-sight)  
+- $N_{\mathrm{H,S}}$ [10$^{24}$ cm$^{-2}$] — (global/scattered)  
+- $\Gamma$ — (photon index)  
+- $A_S$ — (relative normalization)
 """
     )
 
@@ -118,8 +118,8 @@ We report posterior modes and 68% credible intervals for:
 
     st.markdown(
 r"""
-*References* — **MYTORUS**: Murphy & Yaqoob (2009); Yaqoob (2012).  
-*Method & training data*: Daza-Perilla *et al.* “AGN X-ray Reflection Spectroscopy with ML-MYTORUS: Neural Posterior Estimation with Training on Observation-Driven Parameter Grids” (submitted).
+*References* — **MYTORUS**: [Murphy & Yaqoob (2009)](https://ui.adsabs.harvard.edu/abs/2009MNRAS.397.1549M/abstract); [Yaqoob (2012)](https://ui.adsabs.harvard.edu/abs/2012MNRAS.423.3360Y/abstract).  
+*Method & training data*: Daza-Perilla *et al.* — “[AGN X-ray Reflection Spectroscopy with ML-MYTORUS: Neural Posterior Estimation with Training on Observation-Driven Parameter Grids](https://arxiv.org/list/hep-ph/recent)” (submitted).
 """
     )
 
@@ -161,25 +161,27 @@ except Exception as e:
 with st.sidebar:
     with st.expander("How to use (inputs & expected format)"):
         st.markdown(r"""
-ML-MyT estimates the physical parameters of **AGN X-ray spectra from NuSTAR**
+ML-MYT estimates the physical parameters from **distant reflection X-ray spectra of Active Galactic Nuclei (AGN)m NuSTAR**
 using a simulation-based inference approach.
 
 **Steps to use:**
 1. Upload a two-column ASCII file (whitespace-separated):  
    `energy_keV  counts`  
-   This corresponds to an energy range from approximately **1.62 keV to 68 keV**,  
-   with a total of **1360 channels** (rows).
+   This file should include the 4096 energy channels corresponding to the complete NuSTAR spectral range.
 
-2. Provide the Galactic column density $N^{\mathrm{gal}}_{\mathrm{H}}$ [cm⁻²],  
-   the redshift *z* [dimensionless],  
-   and the double exposure time [s].
+2. Provide the **Galactic equivalent neutral hydrogen column density** $N^{\mathrm{gal}}_{\mathrm{H}}$ [cm⁻²],  
+   the redshift *z*,  
+   and **total exposure time** [s].
 
-3. The model returns best-fit values and 68% intervals and its limits 
-   for the following physical parameters:
-   - $N_{\mathrm{H,Z}}$ [10^{24} \,\mathrm{cm}^{-2}] — line-of-sight column density  
-   - $N_{\mathrm{H,S}}$ [10^{24} \,\mathrm{cm}^{-2}] — global (scattered) column density  
-   - $\Gamma$ [dimensionless] — photon index  
-   - $A_S$ [dimensionless] — relative normalization  
+3. The model returns the **most probable values** (posterior modes),  
+   the **68% credible intervals**, and their limits  
+   for the following physical parameters:  
+   - $N_{\mathrm{H,Z}}$ [10^{24} \,\mathrm{cm}^{-2}$] — line-of-sight **equivalent neutral hydrogen column density**  
+   - $N_{\mathrm{H,S}}$ [10^{24} \,\mathrm{cm}^{-2}$] — global (scattered) **equivalent neutral hydrogen column density**  
+   - $\Gamma$ — photon index  
+   - $A_S$ — relative normalization
+
+
 
 **Important:** The input spectrum must be exported using the **XSPEC-based method** (effective energies via RMF) to ensure consistency with the model’s training distribution.
 """)
@@ -268,7 +270,7 @@ using a simulation-based inference approach.
     st.header("Input parameters")
     nhzgal = st.number_input("N_H,Gal", min_value=0.0, step=0.1, value=0.0)
     z = st.number_input("Redshift (z)", min_value=0.0, step=0.001, value=0.0, format="%.3f")
-    exposure_time = st.number_input("Double exposure time (s)", min_value=0.0, step=1.0, value=0.0)
+    exposure_time = st.number_input("Total exposure time (s)", min_value=0.0, step=1.0, value=0.0)
 
     
 
