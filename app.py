@@ -176,8 +176,8 @@ using a simulation-based inference approach.
 3. The model returns the **most probable values** (posterior modes),  
    the **68% credible intervals**, and their limits  
    for the following physical parameters:  
-   - $N_{\mathrm{H,Z}}$ [10^{24} \,\mathrm{cm}^{-2}$] — line-of-sight **equivalent neutral hydrogen column density**  
-   - $N_{\mathrm{H,S}}$ [10^{24} \,\mathrm{cm}^{-2}$] — global (scattered) **equivalent neutral hydrogen column density**  
+   - $N_{\mathrm{H,Z}} [10^{24} \,\mathrm{cm}^{-2}$] — line-of-sight **equivalent neutral hydrogen column density**  
+   - $N_{\mathrm{H,S}} [10^{24} \,\mathrm{cm}^{-2}$] — global (scattered) **equivalent neutral hydrogen column density**  
    - $\Gamma$ — photon index  
    - $A_S$ — relative normalization
 
