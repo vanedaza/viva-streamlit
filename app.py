@@ -161,8 +161,8 @@ except Exception as e:
 with st.sidebar:
     with st.expander("How to use (inputs & expected format)"):
         st.markdown(r"""
-ML-MYT estimates the physical parameters from **distant reflection X-ray spectra of Active Galactic Nuclei (AGN)m NuSTAR**
-using a simulation-based inference approach.
+ML-MYT estimates the physical parameters from **distant reflection X-ray spectra of Active Galactic Nuclei (AGN) observed 
+with NuSTAR** using a simulation-based inference approach.
 
 **Steps to use:**
 1. Upload a two-column ASCII file (whitespace-separated):  
@@ -189,10 +189,17 @@ using a simulation-based inference approach.
         # NEW: Important (PHA → TXT tools & notes) WITH DOWNLOADS
         with st.expander("⚠️ PHA → TXT conversion tools & notes"):
             st.markdown(r"""
-            **Why these scripts are required**  
-            ML-MyT expects spectra exported from **XSPEC** (effective energies via the RMF),  
-            while pure-Python readers (EBOUNDS-only) yield nominal energies.  
-            That leads to **different numerical inputs** for the network.
+            **Why you may want to use these scripts (or your own method)**  
+            ML-MyT expects spectra exported from **XSPEC** uses the (effective energies via the RMF) 
+            to translate detector channels into effective energies, physically calibrated values 
+            that reflect the instrument’s real response (e.g., for NuSTAR), including dispersion, 
+            channel sensitivity, and calibration effects. When the spectrum is exported from XSPEC, 
+            these effective energies ensure physical consistency with the data used during the model’s training.
+            
+            In contrast, pure-Python readers that rely only on EBOUNDS (without the RMF) obtain nominal energies, 
+            that is, the mathematically defined channel boundaries in the file, without instrumental correction.
+            These values differ slightly from the calibrated ones, resulting in numerically inconsistent inputs 
+            for the neural network and therefore less reliable predictions.
 
             **Purpose**  
             Automatically convert a `.pha` into a two-column ASCII file:
@@ -201,7 +208,9 @@ using a simulation-based inference approach.
 
             **How to use**
             1) Install **HEASoft/XSPEC**.  
-            2) Place your `.pha`, its `.rmf` (and any referenced `.arf`/`.bkg`) in the same directory.  
+            2) Place your `.pha`, its `.rmf` (and any referenced `.arf`/`.bkg`) in the same directory.
+            Make sure that both the Bash and Tcl scripts are available in your user path ($PATH), following 
+            standard setup procedures.
             3) Run:
             This produces `yourfile.pha.asc`.
 
@@ -215,7 +224,7 @@ using a simulation-based inference approach.
                 )
             st.markdown(r"""
             - `NR>3` skips the header lines in `w1.qdp`.  
-            - Columns: **$1 = energy (keV)**, **$3 = counts**.  
+            - Columns: **energy (keV)**, **counts**.  
             - Output is a clean ASCII file compatible with ML-MyT.
 
             **Downloads**
