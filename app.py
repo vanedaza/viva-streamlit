@@ -278,7 +278,7 @@ with NuSTAR** using a simulation-based inference approach.
 
     st.header("Input parameters")
     nhzgal = st.number_input("N_H,Gal", min_value=0.0, step=0.1, value=0.0)
-    z = st.number_input("Redshift (z)", min_value=0.0, step=0.001, value=0.0, format="%.3f")
+    z = st.number_input("Redshift (z)", min_value=0.0, step=0.001, value=0.0)
     exposure_time = st.number_input("Total exposure time (s)", min_value=0.0, step=1.0, value=0.0)
 
     
