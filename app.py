@@ -91,7 +91,7 @@ st.markdown("""
 # --- HERO centrado ---
 left, center, right = st.columns([0.5, 7, 0.5])
 with center:
-    st.image("logo.jpg",  use_container_width=True)
+    st.image("logo.png",  use_container_width=True)
     st.markdown(
 r"""
 **WEB-ML-MYTORUS** is the web version of ML-MYTORUS, a machine learning algorithm developed to predict values for four physical parameters of the MYTORUS decoupled distant X-ray reflection model and AGN NuSTAR observations. The physical paramters are:
