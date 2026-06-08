@@ -13,7 +13,7 @@ from math import ceil
 # (opcional pero útil en la nube para evitar exceso de threads)
 torch.set_num_threads(1)
 
-st.set_page_config(page_title="ML_MyT", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="WEB_ML_MYTORUS", layout="wide", initial_sidebar_state="expanded")
 
 ########################### bar style
 # ---- Sidebar fija (ancha) ----
@@ -94,8 +94,7 @@ with center:
     st.image("logo.jpg",  use_container_width=True)
     st.markdown(
 r"""
-**ML-MYT** predicts values for four physical parameters from distant reflection X-ray spectra of Active Galactic Nuclei (AGN) observed with *NuSTAR*, using a simulation-based inference approach (*Neural Posterior Estimation*).  
-The algorithm provides the **posterior modes** (predictive point estimates) and the **credible intervals** for:
+**WEB-ML-MYTORUS** is the web version of ML-MYTORUS, a machine learning algorithm developed to predict values for four physical parameters of the MYTORUS decoupled distant X-ray reflection model and AGN NuSTAR observations. The physical paramters are:
 
 - $N_{\mathrm{H,Z}}$ [10$^{24}$ cm$^{-2}$] — (line-of-sight)  
 - $N_{\mathrm{H,S}}$ [10$^{24}$ cm$^{-2}$] — (global/scattered)  
@@ -146,7 +145,7 @@ except Exception as e:
 with st.sidebar:
     with st.expander("How to use (inputs & expected format)"):
         st.markdown(r"""
-ML-MYT estimates physical parameters from **NuSTAR** distant reflection X-ray spectra (AGN) using **Neural Posterior Estimation (SBI)**.
+ML-MYTORUS estimates physical parameters from **NuSTAR** distant reflection X-ray spectra (AGN) using **Neural Posterior Estimation (SBI)**.
 
 **Steps:**
 1. Upload a whitespace-separated two-column ASCII file:  
@@ -156,7 +155,7 @@ ML-MYT estimates physical parameters from **NuSTAR** distant reflection X-ray sp
 """)
         with st.expander("⚠️ PHA → TXT conversion tools & notes"):
             st.markdown(r"""
-ML-MyT expects spectra exported from **XSPEC** using effective energies via the **RMF**, ensuring physical consistency with the training data.  
+ML-MYTORUS expects spectra exported from **XSPEC** using effective energies via the **RMF**, ensuring physical consistency with the training data.  
 Pure-Python readers that rely only on **EBOUNDS** produce nominal (uncorrected) energies, which do not match the calibrated inputs used for training.
 
 **Purpose:** convert `.pha` → ASCII: `energy_keV   counts`
@@ -226,7 +225,7 @@ with col2:
     st.subheader("Uploaded spectrum")
     st.caption(
         "Interactive visualization of the uploaded NuSTAR spectrum. "
-        "The shaded orange region highlights the 3–30 keV energy range used for ML-MyT."
+        "The shaded orange region highlights the 3–30 keV energy range used for ML-MYTORUS."
     )
     chart = (
         alt.Chart(df)
